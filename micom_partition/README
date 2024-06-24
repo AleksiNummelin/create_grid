@@ -1,0 +1,33 @@
+# README FOR MICOM PARTITIONING TOOLS
+# 
+# short intro on how to use the tool
+#
+# 1) COMPILE THE PROGRAM
+# make sure you include the path to the netcdf library
+# also load the following modules
+# on FRAM
+#module load ifort/2019.1.144-GCC-8.2.0-2.31.1
+#module load netCDF-Fortran/4.4.4-intel-2018a-HDF5-1.8.19
+#on NIRD
+module load netCDF-Fortran/4.6.0-iimpi-2022a
+
+# then build
+sh build.sh
+
+# RUN PARTIT
+./partit
+# the program will wait for user input
+# -number_of_tiles_in_Y_direction, -number_of_tiles_in_X_direction, -number_of_overlapping_cells_between_the_tiles
+# a reasonable first guess is 
+-8,-10,2
+# 0.25 paleo grid: -32,-128,2 ; -32,-64,2;  -4,-128,2 #these (supposedly) work
+# -10,-12,2 # seems promising
+# -6,-60,2 # this seems promising
+#-12,-15,2 #this does not work
+
+
+# RUN TOPO_PPM
+./topo_ppm
+# this will produce a fort.31 file, which is actually a png image
+# showing the tiles on a map, view it with display
+display fort.31 
